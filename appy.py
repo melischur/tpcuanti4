@@ -161,13 +161,18 @@ if section == "Proyectos":
 
     projects = get_projects(None if selected_category == "Todas" else selected_category)
 
-    for project in projects:
+    for idx, project in enumerate(projects):
         st.subheader(project[0])
         st.write(f"**Descripción:** {project[1]}")
         st.write(f"**Autor:** {project[2]}")
         st.write(f"**Categoría:** {project[3]}")
         if project[4]:  # Si hay un archivo PDF
-            st.download_button("Descargar PDF", data=project[4], file_name="proyecto.pdf", mime="application/pdf")
+            st.download_button(
+                f"Descargar PDF - {project[0]}",  # Nombre único para cada botón
+                data=project[4],
+                file_name=f"{project[0]}.pdf",  # También puedes usar el título del proyecto en el nombre del archivo
+                mime="application/pdf"
+            )
 
 elif section == "Estadísticas":
     # Página de Estadísticas
